@@ -57,7 +57,7 @@ src/
 
 ## Como Rodar
 1. Clone o repositório
-2. Execute `./mvnw spring-boot:run` na raiz do projeto
+2. Execute `mvnw.cmd spring-boot:run` na raiz do projeto
 3. Acesse `http://localhost:8080` no navegador
 
 ## Tecnologias
