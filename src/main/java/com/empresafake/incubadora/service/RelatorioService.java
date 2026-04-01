@@ -1,7 +1,12 @@
-package com.empresafake.service;
+package com.empresafake.incubadora.service;
 
+import java.util.List;
 import java.util.Objects;
+import org.springframework.stereotype.Service;
+import com.empresafake.incubadora.model.Ideia;
 
+
+@Service
 public class RelatorioService {
 
      public void gerarRelatorio(List<Ideia> ideiasCadastradas) {

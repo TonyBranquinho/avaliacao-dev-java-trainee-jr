@@ -1,6 +1,10 @@
-package com.empresafake.service;
+package com.empresafake.incubadora.service;
 
+import org.springframework.stereotype.Service;
+import com.empresafake.incubadora.model.Ideia;
+import com.empresafake.incubadora.model.Usuario;
 
+@Service
 public class AprovacaoService {
 
 	public String processarAprovacao(Ideia ideia, Usuario usuario) {

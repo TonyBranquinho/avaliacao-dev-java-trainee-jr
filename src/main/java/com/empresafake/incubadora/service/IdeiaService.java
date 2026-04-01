@@ -17,7 +17,7 @@ public class IdeiaService {
         }
 
         
-        String statusFinal = "Pendente";
+        String statusFinal = "Normal";
         if (descricao != null && descricao.toLowerCase().contains("urgente")) {
             statusFinal = "ALTA PRIORIDADE";
         }
