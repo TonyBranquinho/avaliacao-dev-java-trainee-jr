@@ -19,7 +19,7 @@ API REST desenvolvida com Spring Boot para gerenciamento de ideias.
 
 ## Demonstração do Sistema
 
-![Screenshot do Sistema](frontend.jpg)
+![Screenshot do Sistema](fronted.jpg)
 
 ## Decisões Técnicas
 
