@@ -9,7 +9,7 @@ public class AprovacaoService {
 	    }
 	
 	    if (usuario.getNivelAcesso() == 1) {
-	        throw new IllegalArgumentException("Usuário sem permissão para aprovar.");
+	    	return "REPROVADO - Sem Permissão";
 	    }
 	
 	    String titulo = ideia.getTitulo();
