@@ -17,6 +17,10 @@ API REST desenvolvida com Spring Boot para gerenciamento de ideias.
 - **Issue 2** – Análise de bugs, más práticas e refatoração do AprovacaoService seguindo princípios de Clean Code
 - **Issue 3** – Análise de log, refatoraçao e correção de NullPointerException no RelatorioService
 
+## Demonstração do Sistema
+
+![Screenshot do Sistema](./frontend.jpg)
+
 ## Decisões Técnicas
 
 Além do que foi especificado nas issues, algumas classes foram adicionadas por iniciativa própria para garantir o funcionamento correto da aplicação e seguir boas práticas:
