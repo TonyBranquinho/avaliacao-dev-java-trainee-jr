@@ -1,4 +1,4 @@
-package enums;
+package com.empresafake.incubadora.enums;
 
 public enum NivelAcesso {
 	COMUM(1),
