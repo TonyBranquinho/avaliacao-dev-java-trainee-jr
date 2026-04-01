@@ -1,9 +1,11 @@
 package com.empresafake.incubadora.service;
 
 import com.empresafake.incubadora.model.Ideia;
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class IdeiaService {
 
     private List<Ideia> ideias = new ArrayList<>();
@@ -15,13 +17,13 @@ public class IdeiaService {
         }
 
         
-        String status = "NORMAL";
+        String statusFinal = "Pendente";
         if (descricao != null && descricao.toLowerCase().contains("urgente")) {
-            status = "ALTA PRIORIDADE";
+            statusFinal = "ALTA PRIORIDADE";
         }
         
         
-        Ideia ideia = new Ideia(proximoId++, titulo, descricao, "PENDENTE");
+        Ideia ideia = new Ideia(proximoId++, titulo, descricao, statusFinal);
         ideias.add(ideia);
         return ideia;
     }
