@@ -1,0 +1,26 @@
+Jeferson Antony Branquinho
+
+Issue 2 -------- AprovacaoService.java
+
+Cenário:
+Um colega desenvolvedor iniciante entregou a tarefa de criar um método que processa a aprovação de uma
+ ideia enviada por um usuário. O código compila e parece funcionar quando todos os dados estão
+ perfeitamente preenchidos, mas na revisão de código (Code Review), notamos que ele fere princípios de Clean
+ Code e está vulnerável a vários bugs em produção.
+
+Sua Tarefa:
+
+
+* Análise de Intenção: Explique brevemente o que esse método tenta fazer.
+   - Ele recebe dois parametros, verifica o nivel de permisao (boleano) do usuario,
+   - Define o status da ideia com base no conteudo do campo titulo,
+   - Retorna uma string com adiçao de tags, se houverem.
+
+* Caça aos Bugs (Riscos): Liste todos os possíveis problemas, más práticas e riscos de quebra que você
+  consegue identificar neste trecho.
+   - Se nao validados, os parametros recebidos no metodo podem gerar erro de execâo
+   - A criaçao desse objeto (String statusFinal = new String("");) é desnecessaria, 
+     poderia apenas criar uma variavel string vazia (String statusFinal = "";)
+   - O nome da variavel (t) deveria ser mais claro e revelar a sua intençao.
+   - Retornar null é uma má pratica, deveria lançar uma exeçao ou uma string explicando o problema.
+   - O metodo isEmpty() é mais legivel doque size() > 0, mas nao acho que é um problema. 					

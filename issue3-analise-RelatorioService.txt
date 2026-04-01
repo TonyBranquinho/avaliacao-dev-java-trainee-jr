@@ -1,0 +1,36 @@
+Jeferson Antony Branquinho
+
+Issue 3 ----------- RelatorioService.java
+
+Cenário:
+O sistema da "Incubadora de Projetos" possui uma rotina que gera um relatório simples no console com o título
+ das ideias e o nome dos seus respectivos autores. Em ambiente de testes, a rotina funcionou perfeitamente,
+ mas assim que subimos para produção, o sistema começou a falhar e gerar o erro abaixo no console.
+
+Arquivo de Log recebido:
+
+Snippet de código
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke
+ "com.empresafake.model.Autor.getNome()" because the return value of
+ "com.empresafake.model.Ideia.getAutor()" is null
+at com.empresafake.service.RelatorioService.gerarRelatorio(RelatorioService.java:14)
+at com.empresafake.Application.main(Application.java:22)
+
+Sua Tarefa:
+
+
+* Identificação: Em qual arquivo e em qual linha exata o erro ocorreu?
+- O erro ocorreu no arquivo (RelatorioService.java) linha 14.
+
+* Causa Raiz: Explique com suas palavras por que o Java lançou esse erro. O que aconteceu na
+  memória ou com os dados para o sistema quebrar nessa linha?
+- Um objeto (Ideia), estava na lista com o campo (autor) nao preenchido, quando o codigo tentou chamar
+  (getAutor().getNome()) o (getAutor()) retornou null e entao o codigo tentou chamar o (getNome()), ou seja
+  tentou chamar um metodo dentro de um um resultado nulo, entao o sistema quebrou. 
+
+* Solução: Como você alteraria o código da classe RelatorioService para evitar que esse erro aconteça
+ novamente, garantindo que o relatório continue sendo impresso mesmo se o autor não existir?
+ Mostre o código corrigido.
+- Dentro do for, eu atribui uma string ("Autor não informado") para a variavel (nomeAutor), entao
+  adicionei uma verificaçao de nulidade em cada (getAutor()), se algum deles retornar null,
+  a variavel (nomeAutor) fica com a mensagem ("Autor não informado").   
