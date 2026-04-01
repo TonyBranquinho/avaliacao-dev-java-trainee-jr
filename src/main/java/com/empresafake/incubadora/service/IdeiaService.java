@@ -14,6 +14,13 @@ public class IdeiaService {
             throw new IllegalArgumentException("O título não pode ser nulo ou vazio.");
         }
 
+        
+        String status = "NORMAL";
+        if (descricao != null && descricao.toLowerCase().contains("urgente")) {
+            status = "ALTA PRIORIDADE";
+        }
+        
+        
         Ideia ideia = new Ideia(proximoId++, titulo, descricao, "PENDENTE");
         ideias.add(ideia);
         return ideia;
