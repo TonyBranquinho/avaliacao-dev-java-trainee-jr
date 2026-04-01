@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Incubadora de Ideias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #c8f135;
+      --accent-dim: #9ab82a;
+      --text: #f0f0f0;
+      --muted: #666;
+      --error: #ff4f4f;
+      --radius: 4px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    header {
+      max-width: 680px;
+      margin: 0 auto 48px;
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
+    header p {
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 680px;
+      margin: 0 auto 32px;
+    }
+
+    .card h2 {
+      font-size: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9rem;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
+
+    button {
+      background: var(--accent);
+      color: #0d0d0d;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 12px 28px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button:hover { background: var(--accent-dim); }
+    button:active { transform: scale(0.98); }
+
+    #mensagem-erro {
+      display: none;
+      color: var(--error);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--error);
+      border-radius: var(--radius);
+      background: rgba(255,79,79,0.05);
+    }
+
+    #lista-ideias {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ideia-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ideia-info { flex: 1; }
+
+    .ideia-titulo {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .ideia-descricao {
+      font-size: 0.82rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .ideia-status {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .status-normal {
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .status-alta {
+      background: rgba(200,241,53,0.1);
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+    }
+
+    .vazio {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 32px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Incubadora<br>de Ideias</h1>
+    <p>// sistema de cadastro e listagem</p>
+  </header>
+
+  <div class="card">
+    <h2>// Nova Ideia</h2>
+
+    <label for="titulo">Título</label>
+    <input type="text" id="titulo" placeholder="Digite o título da ideia..." />
+
+    <label for="descricao">Descrição</label>
+    <textarea id="descricao" placeholder="Descreva a ideia... (use 'urgente' para alta prioridade)"></textarea>
+
+    <button onclick="salvarIdeia()">Salvar Ideia</button>
+    <div id="mensagem-erro"></div>
+  </div>
+
+  <div class="card">
+    <h2>// Ideias Cadastradas</h2>
+    <div id="lista-ideias">
+      <div class="vazio">Nenhuma ideia cadastrada ainda.</div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:8080/ideias';
+
+    async function salvarIdeia() {
+      const titulo = document.getElementById('titulo').value.trim();
+      const descricao = document.getElementById('descricao').value.trim();
+      const erro = document.getElementById('mensagem-erro');
+
+      erro.style.display = 'none';
+
+      try {
+        const res = await fetch(`${API}?titulo=${encodeURIComponent(titulo)}&descricao=${encodeURIComponent(descricao)}`, {
+          method: 'POST'
+        });
+
+        if (!res.ok) {
+          const msg = await res.text();
+          erro.textContent = '⚠ ' + (msg || 'Erro ao salvar ideia.');
+          erro.style.display = 'block';
+          return;
+        }
+
+        document.getElementById('titulo').value = '';
+        document.getElementById('descricao').value = '';
+        carregarIdeias();
+
+      } catch (e) {
+        erro.textContent = '⚠ Não foi possível conectar ao servidor.';
+        erro.style.display = 'block';
+      }
+    }
+
+    async function carregarIdeias() {
+      const lista = document.getElementById('lista-ideias');
+
+      try {
+        const res = await fetch(API);
+        const ideias = await res.json();
+
+        if (ideias.length === 0) {
+          lista.innerHTML = '<div class="vazio">Nenhuma ideia cadastrada ainda.</div>';
+          return;
+        }
+
+        lista.innerHTML = ideias.map(i => `
+          <div class="ideia-item">
+            <div class="ideia-info">
+              <div class="ideia-titulo">${i.titulo}</div>
+              <div class="ideia-descricao">${i.descricao || '—'}</div>
+            </div>
+            <span class="ideia-status ${i.status === 'ALTA PRIORIDADE' ? 'status-alta' : 'status-normal'}">
+              ${i.status}
+            </span>
+          </div>
+        `).join('');
+
+      } catch (e) {
+        lista.innerHTML = '<div class="vazio">Erro ao carregar ideias.</div>';
+      }
+    }
+
+    carregarIdeias();
+  </script>
+
+</body>
+</html>
