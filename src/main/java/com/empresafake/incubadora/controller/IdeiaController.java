@@ -2,6 +2,7 @@ package com.empresafake.incubadora.controller;
 
 import com.empresafake.incubadora.model.Ideia;
 import com.empresafake.incubadora.service.IdeiaService;
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,7 +11,8 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class IdeiaController {
 
-    private IdeiaService ideiaService = new IdeiaService();
+	@Autowired 
+    private IdeiaService ideiaService;
 
     @PostMapping
     public Ideia adicionar(@RequestParam String titulo, @RequestParam String descricao) {
